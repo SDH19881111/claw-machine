@@ -1,0 +1,770 @@
+:root {
+  --bg: #1b1035;
+  --panel: rgba(30, 16, 60, 0.75);
+  --card: #2a1856;
+  --line: rgba(255, 255, 255, 0.14);
+  --text: #fff4fa;
+  --muted: #cdb8e6;
+  --pink: #ff4d8d;
+  --yellow: #ffd166;
+  --mint: #06d6a0;
+  --danger: #ff8fa3;
+  font-family: 'Jua', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+}
+
+body {
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+canvas {
+  touch-action: none;
+}
+
+/* ───────── 공통 버튼·카드 ───────── */
+.big-btn {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.big-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.big-btn.primary {
+  background: var(--pink);
+  box-shadow: 0 4px 0 #a3134a;
+}
+
+.big-btn.primary:hover:not(:disabled) {
+  background: #ff6aa0;
+}
+
+.big-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 4px 0 12px;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+/* ───────── 첫 화면 ───────── */
+.home {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 16px;
+  background: radial-gradient(circle at 50% 30%, #3b1d7a, var(--bg) 70%);
+}
+
+.home-title {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(30px, 7vw, 52px);
+  color: var(--muted);
+  text-align: center;
+}
+
+.home-title b {
+  display: block;
+  color: var(--yellow);
+  font-weight: 400;
+  font-size: 1.4em;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(320px, 100%);
+}
+
+.home-buttons .big-btn {
+  padding: 18px;
+  font-size: 22px;
+}
+
+.home-capsules {
+  display: flex;
+  gap: 14px;
+}
+
+.home-capsules span {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(var(--c) 50%, #f8f9fa 50%);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1);
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+.home-capsules span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.home-capsules span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.home-capsules span:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-10px) rotate(12deg);
+  }
+}
+
+/* ───────── 교사 화면 ───────── */
+.teacher {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 16px 40px;
+}
+
+.teacher-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 14px 0;
+  background: var(--bg);
+}
+
+.teacher-bar h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.link-btn {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 0;
+}
+
+.link-btn:hover {
+  color: var(--text);
+}
+
+.gate,
+.settings {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.gate {
+  max-width: 380px;
+  margin-top: 8vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gate h2,
+.settings h2 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--yellow);
+}
+
+.settings h2:not(:first-child) {
+  margin-top: 26px;
+}
+
+.card input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 16px; /* iOS 확대 방지 */
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.items-head,
+.item-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 56px 36px;
+  gap: 8px;
+  align-items: center;
+}
+
+.items-head {
+  color: var(--muted);
+  font-size: 13px;
+  padding: 0 4px;
+}
+
+.pct {
+  text-align: right;
+  color: var(--mint);
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.add-btn {
+  padding: 10px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.rules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.rules label,
+.difficulty {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rules small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.with-unit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.with-unit input {
+  width: 100px;
+}
+
+.difficulty {
+  grid-column: 1 / -1;
+}
+
+.seg {
+  display: flex;
+  gap: 6px;
+}
+
+.seg button {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+}
+
+.seg button.on {
+  background: var(--pink);
+  border-color: var(--pink);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.actions .hint {
+  margin: 0 auto 0 0;
+}
+
+.pw {
+  margin-top: 20px;
+  color: var(--muted);
+}
+
+.pw summary {
+  cursor: pointer;
+}
+
+.pw-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ───────── 게임 HUD ───────── */
+.hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hud button,
+.modal-back {
+  pointer-events: auto;
+}
+
+.status {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border-radius: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.stat strong {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.timer.warn strong {
+  color: var(--danger);
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.phase {
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+}
+
+.tools {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.tool {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.tool.on {
+  border-color: var(--yellow);
+}
+
+.side-frame {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+}
+
+.side-label,
+.side-axis {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.side-label {
+  top: 4px;
+}
+
+.side-axis {
+  bottom: 4px;
+}
+
+.toast {
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #3c096c;
+  font-size: 22px;
+  white-space: nowrap;
+  animation: toast 2.4s ease forwards;
+}
+
+@keyframes toast {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  12%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* 조작부 */
+.controls {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.help {
+  margin-right: auto;
+  font-size: 14px;
+  color: var(--muted);
+  background: var(--panel);
+  padding: 8px 12px;
+  border-radius: 12px;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 6px;
+  margin-right: 2px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.35);
+  font-family: inherit;
+  text-align: center;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 54px);
+  grid-template-rows: repeat(3, 54px);
+  grid-template-areas:
+    '. f .'
+    'l . r'
+    '. b .';
+}
+
+.pad {
+  border: 0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 20px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.pad:active {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.pad-forward {
+  grid-area: f;
+}
+.pad-left {
+  grid-area: l;
+}
+.pad-right {
+  grid-area: r;
+}
+.pad-back {
+  grid-area: b;
+}
+
+.grab {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 0;
+  background: radial-gradient(circle at 35% 30%, #ff8fb5, var(--pink) 60%, #c9184a);
+  box-shadow: 0 6px 0 #8a1036, 0 0 30px rgba(255, 77, 141, 0.5);
+  font-size: 24px;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+.grab:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #8a1036;
+}
+
+.grab:disabled {
+  filter: grayscale(0.7) brightness(0.7);
+  cursor: default;
+}
+
+/* ───────── 결과 창 ───────── */
+.modal-back {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(10, 4, 25, 0.6);
+  animation: fade 0.25s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.modal {
+  width: min(420px, 100%);
+  padding: 26px 22px 22px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.modal h2 {
+  margin: 0 0 14px;
+  font-weight: 400;
+  color: var(--yellow);
+}
+
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+/* 캡슐 위·아래가 벌어지며 이름이 튀어나옴 */
+.opened {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.half {
+  position: absolute;
+  left: 50%;
+  width: 96px;
+  height: 48px;
+  margin-left: -48px;
+}
+
+.half.top {
+  top: 27px;
+  border-radius: 48px 48px 0 0;
+  background: var(--c);
+  animation: openTop 0.6s var(--d) cubic-bezier(0.3, 1.6, 0.5, 1) forwards;
+}
+
+.half.bottom {
+  top: 75px;
+  border-radius: 0 0 48px 48px;
+  background: #f8f9fa;
+  animation: openBottom 0.6s var(--d) cubic-bezier(0.3, 1.6, 0.5, 1) forwards;
+}
+
+@keyframes openTop {
+  to {
+    transform: translate(-70px, -30px) rotate(-35deg);
+    opacity: 0.35;
+  }
+}
+
+@keyframes openBottom {
+  to {
+    transform: translate(70px, 30px) rotate(25deg);
+    opacity: 0.35;
+  }
+}
+
+.prize-name {
+  position: relative;
+  font-size: clamp(26px, 7vw, 36px);
+  font-weight: 400;
+  opacity: 0;
+  transform: scale(0.3);
+  animation: reveal 0.5s calc(var(--d) + 0.3s) cubic-bezier(0.3, 1.8, 0.5, 1) forwards;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wins {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.wins li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--c);
+  font-size: 16px;
+}
+
+.modal .actions {
+  justify-content: center;
+}
+
+/* ───────── 휴대폰(세로: 좁은 폭 / 가로: 낮은 높이) — layout.js isCompact와 같은 기준 ───────── */
+@media (max-width: 719px), (max-height: 499px), (max-width: 899px) and (orientation: portrait) {
+  .status {
+    top: 10px;
+    left: 10px;
+    gap: 10px;
+    padding: 6px 12px;
+  }
+
+  .stat strong {
+    font-size: 20px;
+  }
+
+  .phase {
+    display: none;
+  }
+
+  .tools {
+    top: 10px;
+    right: 10px;
+    gap: 6px;
+  }
+
+  .tool {
+    width: 42px;
+    height: 42px;
+    font-size: 19px;
+  }
+
+  .help {
+    display: none;
+  }
+
+  .controls {
+    left: 12px;
+    right: 12px;
+    justify-content: space-between;
+  }
+
+  .dpad {
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(3, 50px);
+  }
+
+  .grab {
+    width: 96px;
+    height: 96px;
+    font-size: 22px;
+  }
+
+  .toast {
+    font-size: 18px;
+    top: 30%;
+  }
+
+  .rules {
+    grid-template-columns: 1fr;
+  }
+
+  .items-head,
+  .item-row {
+    grid-template-columns: 1fr 64px 48px 34px;
+    gap: 6px;
+  }
+}
