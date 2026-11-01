@@ -81,6 +81,11 @@ function useCountdown() {
   return left
 }
 
+function toggleFullscreen() {
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
+  else document.documentElement.requestFullscreen().catch(() => {})
+}
+
 // 태블릿·휴대폰용 방향 버튼(누르고 있는 동안 이동)
 function HoldButton({ dir, children }) {
   const on = (e) => {
@@ -217,6 +222,12 @@ export default function Hud() {
         <button className={`tool ${sideView ? 'on' : ''}`} onClick={toggleSideView} aria-label="옆 화면">
           👀
         </button>
+        {/* 클뷰플에서는 전체 화면을 켜면 창이 TV로 옮겨 간다. 지원 안 하는 기기(아이폰 등)에서는 숨김 */}
+        {document.fullscreenEnabled && (
+          <button className="tool" onClick={toggleFullscreen} aria-label="전체 화면">
+            ⛶
+          </button>
+        )}
         <button className="tool" onClick={() => go('home')} aria-label="처음으로">
           🏠
         </button>
